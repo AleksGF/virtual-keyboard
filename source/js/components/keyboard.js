@@ -1,6 +1,7 @@
 // Make icon for key
 const getIcon = (link) => {
   const icon = document.createElement('object');
+  icon.className = 'key__icon';
   icon.type = 'image/svg+xml';
   icon.data = link;
 
@@ -35,20 +36,26 @@ const getKeyElement = (key, lang) => {
 
   // Use different classNames for usual and func keys
   if (key.classList.includes('key_func')) {
-    keyElement.className = 'keyboard__key_func key';
+    keyElement.className = `keyboard__key_func keyboard__key_width${key.width} key`;
   } else {
-    keyElement.className = 'keyboard__key_main key';
+    keyElement.className = `keyboard__key_main keyboard__key_width${key.width} key`;
   }
 
-  // TODO Use different classNames for different width
+  // Use classNames for different content position
+  if (key.classList.includes('position_left')) {
+    keyElement.classList.add('keyboard__key_left');
+  }
+
+  if (key.classList.includes('position_right')) {
+    keyElement.classList.add('keyboard__key_right');
+  }
+
+  if (key.classList.includes('position_center')) {
+    keyElement.classList.add('keyboard__key_center');
+  }
 
   const keyOuterElement = document.createElement('div');
   keyOuterElement.className = 'key__outer';
-  keyElement.append(keyOuterElement);
-
-  const keyInnerElement = document.createElement('div');
-  keyInnerElement.className = 'key__inner';
-  keyOuterElement.append(keyInnerElement);
 
   const keyContentContainer = document.createElement('div');
   keyContentContainer.className = 'key__container';
@@ -65,7 +72,8 @@ const getKeyElement = (key, lang) => {
     keyContentContainer.append(getSingleContent(key.displayContent[lang].shifted));
   }
 
-  keyInnerElement.append(keyContentContainer);
+  keyOuterElement.append(keyContentContainer);
+  keyElement.append(keyOuterElement);
 
   return keyElement;
 };

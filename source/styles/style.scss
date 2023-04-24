@@ -12,6 +12,34 @@ $key-func-background-color: #232323;
 
 html {
   font-size: 20px;
+
+  @media screen and (max-width: 1160px) {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 1040px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 920px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 800px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 700px) {
+    font-size: 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 8px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 6px;
+  }
 }
 
 #root {
@@ -52,7 +80,7 @@ html {
 }
 
 .keyboard__container {
-  width: 54rem;
+  width: 55rem;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -166,6 +194,12 @@ html {
   border-radius: .3rem;
   overflow: hidden;
   cursor: pointer;
+  transition: .3s;
+
+  &.pressed {
+    filter: brightness(90%);
+    transform: scaleY(97%) translateY(3%);
+  }
 }
 
 .key__outer {

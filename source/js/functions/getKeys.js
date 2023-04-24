@@ -77,6 +77,8 @@ const getKeyElement = (key) => {
     keyElement.classList.add('keyboard__key_center');
   }
 
+  keyElement.dataset.code = key.code;
+
   const keyOuterElement = document.createElement('div');
   keyOuterElement.className = 'key__outer';
 

@@ -23,6 +23,8 @@ const render = (keyElements, currentLang) => {
   keyboardWrapper.append(...[keyboardElement, infoElement]);
   wrapper.append(...[textareaElement, keyboardWrapper]);
   body.prepend(wrapper);
+
+  return { textareaElement, keyboardElement };
 };
 
 export default render;

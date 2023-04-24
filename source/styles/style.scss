@@ -44,6 +44,13 @@ html {
   outline: 0;
 }
 
+.keyboard__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
 .keyboard__container {
   width: 54rem;
   padding: 1rem;
@@ -107,8 +114,8 @@ html {
     width: 7.1rem;
   }
 
-  &_width300 {
-    width: 26rem;
+  &_width750 {
+    width: 24rem;
   }
 
   &_main {
@@ -213,7 +220,7 @@ html {
   height: 1rem;
 }
 
-.info {
+.keyboard__info {
   align-self: flex-start;
   font-size: 0.8rem;
 }

@@ -693,7 +693,7 @@ const keys = [
       ico: null,
     },
     classList: ['key_func'],
-    width: 300,
+    width: 750,
   },
   {
     code: 'AltRight',
@@ -705,7 +705,7 @@ const keys = [
       ico: null,
     },
     classList: ['key_func', 'position_right'],
-    width: 100,
+    width: 125,
   },
   {
     code: 'ControlRight',
@@ -717,7 +717,7 @@ const keys = [
       ico: null,
     },
     classList: ['key_func', 'position_right'],
-    width: 100,
+    width: 125,
   },
   {
     code: 'ArrowLeft',

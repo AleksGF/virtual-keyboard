@@ -115,6 +115,10 @@ html {
     display: block;
     animation: 0.2s displayContent;
   }
+
+  &_caps .key[data-code = "CapsLock"] .key__icon {
+    transform: rotate(180deg);
+  }
 }
 
 .keyboard__key {

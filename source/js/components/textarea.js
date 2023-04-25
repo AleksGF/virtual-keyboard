@@ -1,8 +1,9 @@
 const textarea = () => {
-  const textarea = document.createElement('textarea');
-  textarea.className = 'textarea';
+  const textareaElement = document.createElement('textarea');
+  textareaElement.className = 'textarea';
+  textareaElement.autofocus = true;
 
-  return textarea;
+  return textareaElement;
 };
 
 export default textarea;

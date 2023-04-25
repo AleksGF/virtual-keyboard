@@ -1,9 +1,9 @@
 // Make icon for key
 const getIcon = (link) => {
-  const icon = document.createElement('object');
+  const icon = document.createElement('img');
   icon.className = 'key__icon';
-  icon.type = 'image/svg+xml';
-  icon.data = link;
+  icon.src = link;
+  icon.alt = 'Key icon';
 
   return [icon];
 };

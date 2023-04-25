@@ -13,6 +13,7 @@ const { supportedLangs } = getSettings();
 const { keyElements, keyElementsMap } = getKeys(keys, supportedLangs);
 const { textareaElement, keyboardElement } = render(keyElements, currentLang);
 const pressedKeys = new Set();
+const isCaps = { current: false };
 
 const realKeyPressHandler = (map) => (e) => {
   realKeyboardHandler(e, map);
@@ -34,7 +35,7 @@ const setLanguage = (elements, map) => () => {
 };
 
 const textareaHandler = (container, pressedKeysSet, changeLanguage) => (e) => {
-  textareaInputHandler(e, container, currentLang, pressedKeysSet, changeLanguage);
+  textareaInputHandler(e, container, currentLang, pressedKeysSet, isCaps, changeLanguage);
 };
 
 document.addEventListener('keydown', realKeyPressHandler(keyElementsMap));

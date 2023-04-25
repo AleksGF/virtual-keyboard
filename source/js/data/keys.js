@@ -208,7 +208,7 @@ const keys = [
     key: { en: 'e', ru: 'у', uk: 'у' },
     displayContent: {
       en: { main: 'e', shifted: 'E' },
-      ru: { main: 'У', shifted: 'У' },
+      ru: { main: 'у', shifted: 'У' },
       uk: { main: 'у', shifted: 'У' },
       ico: null,
     },
@@ -388,7 +388,7 @@ const keys = [
     key: { en: 'd', ru: 'в', uk: 'в' },
     displayContent: {
       en: { main: 'd', shifted: 'D' },
-      ru: { main: 'В', shifted: 'В' },
+      ru: { main: 'в', shifted: 'В' },
       uk: { main: 'в', shifted: 'В' },
       ico: null,
     },
@@ -532,7 +532,7 @@ const keys = [
     key: { en: 'x', ru: 'ч', uk: 'ч' },
     displayContent: {
       en: { main: 'x', shifted: 'X' },
-      ru: { main: 'Ч', shifted: 'Ч' },
+      ru: { main: 'ч', shifted: 'Ч' },
       uk: { main: 'ч', shifted: 'Ч' },
       ico: null,
     },

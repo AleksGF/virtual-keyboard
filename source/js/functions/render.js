@@ -25,7 +25,6 @@ const render = (keyElements, currentLang) => {
   wrapper.append(...[textareaElement, keyboardWrapper]);
   body.prepend(wrapper);
 
-  textareaElement.focus();
   textareaElement.addEventListener('blur', () => { textareaElement.focus(); });
 
   return { textareaElement, keyboardElement };

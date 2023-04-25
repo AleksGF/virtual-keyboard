@@ -1,3 +1,4 @@
+//TODO move imports to index
 import textarea from '../components/textarea.js';
 import keyboard from '../components/keyboard.js';
 import info from '../components/information.js';
@@ -23,6 +24,9 @@ const render = (keyElements, currentLang) => {
   keyboardWrapper.append(...[keyboardElement, infoElement]);
   wrapper.append(...[textareaElement, keyboardWrapper]);
   body.prepend(wrapper);
+
+  textareaElement.focus();
+  textareaElement.addEventListener('blur', () => { textareaElement.focus(); });
 
   return { textareaElement, keyboardElement };
 };

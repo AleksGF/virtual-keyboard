@@ -218,6 +218,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 200ms ease-out;
 
   .keyboard__key_left & {
     width: 100%;

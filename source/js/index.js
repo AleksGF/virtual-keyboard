@@ -1,12 +1,17 @@
 import keys from './data/keys.js';
+import getSettings from './functions/getSettings.js';
+import setSettings from './functions/setSettings.js';
 import getKeys from './functions/getKeys.js';
 import render from './functions/render.js';
+import rerender from './functions/rerender.js';
 import realKeyboardHandler from './functions/realKeyboardHandler.js';
 import virtualKeyboardHandler from './functions/virtualKeyboardHandler.js';
 import textareaInputHandler from './functions/textareaInputHandler.js';
 
-const { keyElements, keyElementsMap } = getKeys(keys, ['en', 'ru', 'uk']);
-const { textareaElement, keyboardElement } = render(keyElements, 'ru');
+let { currentLang } = getSettings();
+const { supportedLangs } = getSettings();
+const { keyElements, keyElementsMap } = getKeys(keys, supportedLangs);
+const { textareaElement, keyboardElement } = render(keyElements, currentLang);
 const pressedKeys = new Set();
 
 const realKeyPressHandler = (map) => (e) => {
@@ -17,14 +22,25 @@ const virtualKeyPressHandler = (map) => (e) => {
   virtualKeyboardHandler(e, map);
 };
 
-const textareaHandler = (container, currentLang) => (e) => {
-  textareaInputHandler(e, container, currentLang, pressedKeys);
+const setLanguage = (elements, map) => () => {
+  let newLangIndex = supportedLangs.indexOf(currentLang) + 1;
+
+  if (newLangIndex >= supportedLangs.length) newLangIndex = 0;
+
+  const newLang = supportedLangs[newLangIndex];
+  setSettings(newLang);
+  currentLang = newLang;
+  rerender(elements, map, currentLang);
 };
 
-textareaElement.focus();
+const textareaHandler = (container, pressedKeysSet, changeLanguage) => (e) => {
+  textareaInputHandler(e, container, currentLang, pressedKeysSet, changeLanguage);
+};
 
 document.addEventListener('keydown', realKeyPressHandler(keyElementsMap));
 document.addEventListener('keyup', realKeyPressHandler(keyElementsMap));
-textareaElement.addEventListener('blur', () => { textareaElement.focus(); });
 keyboardElement.addEventListener('mousedown', virtualKeyPressHandler(keyElementsMap));
-document.addEventListener('typing', textareaHandler(textareaElement, 'ru'));
+document.addEventListener(
+  'typing',
+  textareaHandler(textareaElement, pressedKeys, setLanguage(keyElements, keyElementsMap)),
+);

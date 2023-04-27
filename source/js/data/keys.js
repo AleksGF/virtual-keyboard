@@ -701,7 +701,7 @@ const keys = [
     displayContent: {
       en: { main: 'Alt', shifted: 'Alt' },
       ru: { main: 'Alt', shifted: 'Alt' },
-      uk: { main: '', shifted: '' },
+      uk: { main: 'Alt', shifted: 'Alt' },
       ico: null,
     },
     classList: ['key_func', 'position_right'],

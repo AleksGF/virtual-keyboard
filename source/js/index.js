@@ -39,6 +39,7 @@ const body = document.querySelector('#root');
 
 render(body, components);
 
+// ES6 provides a feature known as Arrow Functions
 const setLanguage = () => {
   const newLanguage = getNextLanguage(state);
   state.currentLanguage = newLanguage;

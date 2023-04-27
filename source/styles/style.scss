@@ -14,31 +14,11 @@ html {
   font-size: 20px;
 
   @media screen and (max-width: 1160px) {
-    font-size: 18px;
-  }
-
-  @media screen and (max-width: 1040px) {
-    font-size: 16px;
-  }
-
-  @media screen and (max-width: 920px) {
-    font-size: 14px;
+    font-size: 1.5vw;
   }
 
   @media screen and (max-width: 800px) {
-    font-size: 12px;
-  }
-
-  @media screen and (max-width: 700px) {
-    font-size: 10px;
-  }
-
-  @media screen and (max-width: 600px) {
-    font-size: 8px;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 1.25vw;
   }
 }
 

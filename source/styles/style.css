@@ -10,37 +10,12 @@ html {
 }
 @media screen and (max-width: 1160px) {
   html {
-    font-size: 18px;
-  }
-}
-@media screen and (max-width: 1040px) {
-  html {
-    font-size: 16px;
-  }
-}
-@media screen and (max-width: 920px) {
-  html {
-    font-size: 14px;
+    font-size: 1.5vw;
   }
 }
 @media screen and (max-width: 800px) {
   html {
-    font-size: 12px;
-  }
-}
-@media screen and (max-width: 700px) {
-  html {
-    font-size: 10px;
-  }
-}
-@media screen and (max-width: 600px) {
-  html {
-    font-size: 8px;
-  }
-}
-@media screen and (max-width: 480px) {
-  html {
-    font-size: 6px;
+    font-size: 1.25vw;
   }
 }
 

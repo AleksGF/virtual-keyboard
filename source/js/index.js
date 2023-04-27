@@ -5,7 +5,7 @@ import setSettings from './settings/setSettings.js';
 import textarea from './components/textarea.js';
 import keyboard from './components/keyboard.js';
 import information from './components/information.js';
-import getKeys from './functions/getKeys.js';
+import getKeys from './keys/getKeys.js';
 import render from './functions/render.js';
 import moveCaret from './functions/moveCaret.js';
 import setNewValue from './functions/setNewValue.js';

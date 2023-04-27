@@ -1,13 +1,19 @@
 const virtualKeyboardHandler = (e, keys) => {
   const key = e.target.closest('.key');
 
+  class TypingEvent extends KeyboardEvent {
+    constructor(data) {
+      super('typing');
+      this.data = { ...data };
+    }
+  }
+
   function keyUpHandler() {
     this.classList.remove('pressed');
-    const keyCode = this.dataset.code;
+    const { code } = this.dataset;
 
-    const newEvent = new Event('typing');
-    newEvent.data = { type: 'keyup', code: keyCode };
-    document.dispatchEvent(newEvent);
+    const event = new TypingEvent({ type: 'keyup', code });
+    document.dispatchEvent(event);
 
     this.removeEventListener('mouseup', keyUpHandler);
     this.removeEventListener('mouseleave', keyUpHandler);
@@ -17,13 +23,6 @@ const virtualKeyboardHandler = (e, keys) => {
     const { code } = key.dataset;
     const content = keys.keys.find((data) => data.code === code).displayContent;
     key.classList.add('pressed');
-
-    class TypingEvent extends Event {
-      constructor(data) {
-        super('typing');
-        this.data = { ...data };
-      }
-    }
 
     const event = new TypingEvent({ type: 'keydown', code, content });
     document.dispatchEvent(event);

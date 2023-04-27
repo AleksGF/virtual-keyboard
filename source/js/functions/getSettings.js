@@ -1,9 +1,9 @@
 const getSettings = () => {
-  const savedLang = localStorage.getItem('keyLang');
-  const currentLang = savedLang || 'en';
-  const supportedLangs = ['en', 'ru', 'uk'];
+  const supportedLanguages = ['en', 'ru', 'uk'];
+  const savedLanguage = localStorage.getItem('keyLang');
+  const currentLanguage = (savedLanguage) || 'en';
 
-  return { currentLang, supportedLangs };
+  return { currentLanguage, supportedLanguages };
 };
 
 export default getSettings;

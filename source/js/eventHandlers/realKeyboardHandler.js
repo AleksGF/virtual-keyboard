@@ -1,22 +1,22 @@
 // generate user's event on virtual key when events happens on real keyboard
-const onKeyDown = (key) => {
-  const { keyElement } = key;
+const onKeyDown = (keyElement) => {
   const event = new Event('mousedown', { bubbles: true });
   keyElement.dispatchEvent(event);
 };
 
-const onKeyUp = (key) => {
-  const { keyElement } = key;
+const onKeyUp = (keyElement) => {
   const event = new Event('mouseup', { bubbles: true });
   keyElement.dispatchEvent(event);
 };
 
-const realKeyboardHandler = (e, keyElementsMap) => {
+const realKeyboardHandler = (e, keys) => {
   const { code } = e;
-  const key = keyElementsMap[code];
+  const { keysElements } = keys;
+
+  const keyElement = keysElements[code];
 
   // prevent default except altKey, ctrlKey, shiftKey and func combinations
-  if (key && (
+  if (keyElement && (
     code !== 'ControlLeft'
     && code !== 'ControlRight'
     && code !== 'AltLeft'
@@ -35,12 +35,12 @@ const realKeyboardHandler = (e, keyElementsMap) => {
   }
 
   // do not react on repeated and user events
-  if (key && e.type === 'keydown' && !e.repeat && e.isTrusted) {
-    onKeyDown(key);
+  if (keyElement && e.type === 'keydown' && !e.repeat && e.isTrusted) {
+    onKeyDown(keyElement);
   }
 
-  if (key && e.type === 'keyup') {
-    onKeyUp(key);
+  if (keyElement && e.type === 'keyup') {
+    onKeyUp(keyElement);
   }
 };
 

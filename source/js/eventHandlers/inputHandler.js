@@ -1,6 +1,6 @@
-const textareaInputHandler = (e, container, currentLang, pressedKeys, isCaps, changeLanguage) => {
-  const textarea = container;
-  const wasCapsPressed = isCaps;
+const inputHandler = (e, components, keys, state, setLanguage) => {
+  const { textarea, keyboard } = components;
+  const { isCapsLock, pressedKeys, currentLanguage } = state;
 
   const getSelection = () => ({ start: textarea.selectionStart, end: textarea.selectionEnd });
 
@@ -51,21 +51,19 @@ const textareaInputHandler = (e, container, currentLang, pressedKeys, isCaps, ch
     switch (e.data.code) {
       case 'ShiftLeft':
       case 'ShiftRight':
-        document.querySelector('.keyboard__container').classList
-          .add('keyboard__container_shift');
+        keyboard.classList.add('keyboard__container_shift');
         break;
 
       case 'ControlLeft':
       case 'AltLeft':
         if (pressedKeys.has('ControlLeft') && pressedKeys.has('AltLeft')) {
-          changeLanguage();
+          setLanguage();
         }
         break;
 
       case 'CapsLock':
-        wasCapsPressed.value = !wasCapsPressed.value;
-        document.querySelector('.keyboard__container').classList
-          .toggle('keyboard__container_caps');
+        isCapsLock.value = !isCapsLock.value;
+        keyboard.classList.toggle('keyboard__container_caps');
         break;
 
       case 'ArrowUp':
@@ -94,10 +92,10 @@ const textareaInputHandler = (e, container, currentLang, pressedKeys, isCaps, ch
       default:
         if (!isCtrl && !isAlt) {
           let newValue = isShift
-            ? e.data.content[currentLang].shifted
-            : e.data.content[currentLang].main;
+            ? e.data.content[currentLanguage].shifted
+            : e.data.content[currentLanguage].main;
 
-          if (wasCapsPressed.value) {
+          if (isCapsLock.value) {
             newValue = isShift
               ? newValue.toLowerCase()
               : newValue.toUpperCase();
@@ -115,8 +113,7 @@ const textareaInputHandler = (e, container, currentLang, pressedKeys, isCaps, ch
       case 'ShiftLeft':
       case 'ShiftRight':
         if (!pressedKeys.has('ShiftRight') && !pressedKeys.has('ShiftLeft')) {
-          document.querySelector('.keyboard__container').classList
-            .remove('keyboard__container_shift');
+          keyboard.classList.remove('keyboard__container_shift');
         }
         break;
 
@@ -126,4 +123,4 @@ const textareaInputHandler = (e, container, currentLang, pressedKeys, isCaps, ch
   }
 };
 
-export default textareaInputHandler;
+export default inputHandler;

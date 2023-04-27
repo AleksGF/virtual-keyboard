@@ -1,8 +1,8 @@
 // Make icon for key
-const getIcon = (link) => {
+const getIcon = (src) => {
   const icon = document.createElement('img');
   icon.className = 'key__icon';
-  icon.src = link;
+  icon.src = src;
   icon.alt = 'Key icon';
 
   return [icon];
@@ -30,7 +30,7 @@ const getSingleContent = (content) => {
   return [contentElement];
 };
 
-const getKeyContent = (key, supportedLangs) => {
+const getKeyContent = (key, languages) => {
   const keyContent = {};
 
   // If key has icons - use it, else use text content
@@ -38,15 +38,15 @@ const getKeyContent = (key, supportedLangs) => {
     keyContent.iconContent = getIcon(key.displayContent.ico);
   } else if (key.classList.includes('key_mod')) {
     // If key has different content for main and shifted state - make two contents
-    supportedLangs.forEach((lang) => {
-      keyContent[lang] = getDoubleContent(
-        key.displayContent[lang].main.toUpperCase(),
-        key.displayContent[lang].shifted,
+    languages.forEach((language) => {
+      keyContent[language] = getDoubleContent(
+        key.displayContent[language].main.toUpperCase(),
+        key.displayContent[language].shifted,
       );
     });
   } else {
-    supportedLangs.forEach((lang) => {
-      keyContent[lang] = getSingleContent(key.displayContent[lang].main.toUpperCase());
+    languages.forEach((language) => {
+      keyContent[language] = getSingleContent(key.displayContent[language].main.toUpperCase());
     });
   }
 
@@ -91,18 +91,25 @@ const getKeyElement = (key) => {
   return keyElement;
 };
 
-const getKeys = (keys, supportedLangs) => {
-  const keyElements = [];
-  const keyElementsMap = {};
+const getKeys = (keysData, state) => {
+  const keysCodes = [];
+  const keysElements = {};
+  const keysContents = new WeakMap();
+  const { supportedLanguages } = state;
 
-  keys.forEach((key) => {
+  keysData.forEach((key) => {
     const keyElement = getKeyElement(key);
-    const keyContent = getKeyContent(key, supportedLangs);
-    keyElements.push({ keyElement, keyContent });
-    keyElementsMap[key.code] = { key, keyElement, keyContent };
+    keysCodes.push(key.code);
+    keysElements[key.code] = keyElement;
+    keysContents.set(keyElement, getKeyContent(key, supportedLanguages));
   });
 
-  return { keyElements, keyElementsMap };
+  return {
+    keys: keysData,
+    keysCodes,
+    keysElements,
+    keysContents,
+  };
 };
 
 export default getKeys;

@@ -1,11 +1,19 @@
 // Make board with all keys
-const keyboard = (keyElements, lang) => {
+const keyboard = (keys, state) => {
+  const { keysCodes, keysElements, keysContents } = keys;
+  const { currentLanguage } = state;
+
   const keyboardElement = document.createElement('section');
   keyboardElement.className = 'keyboard__container';
 
-  keyElements.forEach(({ keyElement, keyContent }) => {
+  keysCodes.forEach((code) => {
+    const keyElement = keysElements[code];
+    const keyContents = keysContents.get(keyElement);
     const container = keyElement.querySelector('.key__container');
-    const content = keyContent.iconContent ? keyContent.iconContent : keyContent[lang];
+    const content = keyContents.iconContent
+      ? keyContents.iconContent
+      : keyContents[currentLanguage];
+
     container.append(...content);
     keyboardElement.append(keyElement);
   });

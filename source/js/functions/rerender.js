@@ -1,20 +1,28 @@
-const rerender = (keyElements, keyElementsMap, lang) => {
+const rerender = (keys, state) => {
   const timeout = 200;
+  const { keysCodes, keysElements, keysContents } = keys;
+  const { currentLanguage } = state;
 
-  const keysToChange = keyElements
-    .filter((key) => !key.keyContent.iconContent
-      && !key.keyElement.classList.contains('keyboard__key_func'));
+  const keysToChange = keysCodes
+    .filter((code) => {
+      const keyElement = keysElements[code];
+      const keyContent = keysContents.get(keyElement);
 
-  keysToChange.forEach((key) => {
-    const element = key.keyElement.querySelector('.key__container');
-    element.style.opacity = '0';
+      return !keyContent.iconContent && !keyElement.classList.contains('keyboard__key_func');
+    })
+    .map((code) => keysElements[code]);
+
+  keysToChange.forEach((keyElement) => {
+    const container = keyElement.querySelector('.key__container');
+    container.style.opacity = '0';
   });
 
   setTimeout(() => {
-    keysToChange.forEach((key) => {
-      const element = key.keyElement.querySelector('.key__container');
-      element.replaceChildren(...key.keyContent[lang]);
-      element.style.opacity = '1';
+    keysToChange.forEach((keyElement) => {
+      const container = keyElement.querySelector('.key__container');
+      const content = keysContents.get(keyElement)[currentLanguage];
+      container.replaceChildren(...content);
+      container.style.opacity = '1';
     });
   }, timeout);
 };

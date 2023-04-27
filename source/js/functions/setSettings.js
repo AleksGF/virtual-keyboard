@@ -1,5 +1,5 @@
-const setSettings = (newLang) => {
-  localStorage.setItem('keyLang', newLang);
+const setSettings = (newLanguage) => {
+  localStorage.setItem('keyLang', newLanguage);
 };
 
 export default setSettings;

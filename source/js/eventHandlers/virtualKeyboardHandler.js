@@ -18,8 +18,14 @@ const virtualKeyboardHandler = (e, keys) => {
     const content = keys.keys.find((data) => data.code === code).displayContent;
     key.classList.add('pressed');
 
-    const event = new Event('typing');
-    event.data = { type: 'keydown', code, content };
+    class TypingEvent extends Event {
+      constructor(data) {
+        super('typing');
+        this.data = { ...data };
+      }
+    }
+
+    const event = new TypingEvent({ type: 'keydown', code, content });
     document.dispatchEvent(event);
 
     key.addEventListener('mouseup', keyUpHandler);

@@ -1,45 +1,12 @@
-const inputHandler = (e, components, keys, state, setLanguage) => {
+const inputHandler = (e, components, keys, state, actions) => {
   const { textarea, keyboard } = components;
   const { isCapsLock, pressedKeys, currentLanguage } = state;
+  const {
+    setLanguage, moveCaret, setNewValue, changeKeyboard,
+  } = actions;
 
-  const getSelection = () => ({ start: textarea.selectionStart, end: textarea.selectionEnd });
-
-  const moveCaret = (code) => {
-    const event = new KeyboardEvent('keyDown', { composed: true, code });
-    textarea.dispatchEvent(event);
-  };
-
-  const setNewValue = (value) => {
-    let newValue;
-    let newStart;
-    const currentValue = textarea.value;
-    const { start, end } = getSelection();
-
-    switch (value) {
-      case 'Delete':
-        newValue = start === end
-          ? currentValue.substring(0, start) + currentValue.substring(end + 1)
-          : currentValue.substring(0, start) + currentValue.substring(end);
-        newStart = start;
-        break;
-
-      case 'Backspace':
-        newValue = start === end
-          ? currentValue.substring(0, start - 1) + currentValue.substring(end)
-          : currentValue.substring(0, start) + currentValue.substring(end);
-        newStart = start - 1;
-        break;
-
-      default:
-        newValue = currentValue.substring(0, start) + value + currentValue.substring(end);
-        newStart = start + value.length;
-    }
-
-    if (newStart < 0) newStart = 0;
-
-    textarea.value = newValue;
-    textarea.selectionStart = newStart;
-    textarea.selectionEnd = newStart;
+  const changeKeyboardClsList = (action, clsName) => {
+    changeKeyboard(keyboard, action, clsName);
   };
 
   if (e.data.type === 'keydown') {
@@ -51,7 +18,7 @@ const inputHandler = (e, components, keys, state, setLanguage) => {
     switch (e.data.code) {
       case 'ShiftLeft':
       case 'ShiftRight':
-        keyboard.classList.add('keyboard__container_shift');
+        changeKeyboardClsList('add', 'keyboard__container_shift');
         break;
 
       case 'ControlLeft':
@@ -63,30 +30,30 @@ const inputHandler = (e, components, keys, state, setLanguage) => {
 
       case 'CapsLock':
         isCapsLock.value = !isCapsLock.value;
-        keyboard.classList.toggle('keyboard__container_caps');
+        changeKeyboardClsList('toggle', 'keyboard__container_caps');
         break;
 
       case 'ArrowUp':
       case 'ArrowDown':
       case 'ArrowRight':
       case 'ArrowLeft':
-        moveCaret(e.data.code);
+        moveCaret(textarea, e.data.code);
         break;
 
       case 'Delete':
-        setNewValue('Delete');
+        setNewValue(textarea, 'Delete');
         break;
 
       case 'Backspace':
-        setNewValue('Backspace');
+        setNewValue(textarea, 'Backspace');
         break;
 
       case 'Tab':
-        setNewValue('\t');
+        setNewValue(textarea, '\t');
         break;
 
       case 'Enter':
-        setNewValue('\n');
+        setNewValue(textarea, '\n');
         break;
 
       default:
@@ -101,7 +68,7 @@ const inputHandler = (e, components, keys, state, setLanguage) => {
               : newValue.toUpperCase();
           }
 
-          setNewValue(newValue);
+          setNewValue(textarea, newValue);
         }
     }
   }
@@ -113,7 +80,7 @@ const inputHandler = (e, components, keys, state, setLanguage) => {
       case 'ShiftLeft':
       case 'ShiftRight':
         if (!pressedKeys.has('ShiftRight') && !pressedKeys.has('ShiftLeft')) {
-          keyboard.classList.remove('keyboard__container_shift');
+          changeKeyboardClsList('remove', 'keyboard__container_shift');
         }
         break;
 

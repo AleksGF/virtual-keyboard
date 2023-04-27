@@ -1,13 +1,16 @@
 // ES6 introduced a new feature called modules
 import keysData from './data/keys.js';
-import getSettings from './functions/getSettings.js';
-import setSettings from './functions/setSettings.js';
+import getSettings from './settings/getSettings.js';
+import setSettings from './settings/setSettings.js';
 import textarea from './components/textarea.js';
 import keyboard from './components/keyboard.js';
 import information from './components/information.js';
 import getKeys from './functions/getKeys.js';
 import render from './functions/render.js';
-import getNextLanguage from './functions/getNextLanguage.js';
+import moveCaret from './functions/moveCaret.js';
+import setNewValue from './functions/setNewValue.js';
+import getNextLanguage from './settings/getNextLanguage.js';
+import changeKeyboard from './functions/changeKeyboard.js';
 import rerender from './functions/rerender.js';
 import realKeyboardHandler from './eventHandlers/realKeyboardHandler.js';
 import virtualKeyboardHandler from './eventHandlers/virtualKeyboardHandler.js';
@@ -43,6 +46,13 @@ const setLanguage = () => {
   rerender(keys, state);
 };
 
+const actions = {
+  setLanguage,
+  moveCaret,
+  setNewValue,
+  changeKeyboard,
+};
+
 const realKeyPressHandler = (e) => {
   realKeyboardHandler(e, keys);
 };
@@ -52,7 +62,7 @@ const virtualKeyPressHandler = (e) => {
 };
 
 const textareaHandler = (e) => {
-  inputHandler(e, components, keys, state, setLanguage);
+  inputHandler(e, components, keys, state, actions);
 };
 
 document.addEventListener('keydown', realKeyPressHandler);

@@ -300,7 +300,7 @@ const keys = [
     width: 100,
   },
   {
-    code: 'Bracket Left',
+    code: 'BracketLeft',
     key: { en: '[', ru: 'х', uk: 'х' },
     displayContent: {
       en: { main: '[', shifted: '{' },

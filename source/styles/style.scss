@@ -181,6 +181,7 @@ html {
   transition: .3s;
 
   &.pressed {
+    animation: .3s pressKey;
     filter: brightness(90%);
     transform: scaleY(97%) translateY(3%);
   }
@@ -242,6 +243,17 @@ html {
 .keyboard__info {
   align-self: flex-start;
   font-size: 0.8rem;
+}
+
+@keyframes pressKey {
+  from {
+    filter: brightness(100%);
+    transform: scaleY(100%) translateY(0);
+  }
+  to {
+    filter: brightness(90%);
+    transform: scaleY(97%) translateY(3%);
+  }
 }
 
 @keyframes displayContent {

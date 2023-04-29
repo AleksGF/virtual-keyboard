@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 20px;
+}
+@media screen and (max-width: 1160px) {
+  html {
+    font-size: 1.5vw;
+  }
+}
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 1.25vw;
+  }
+}
+
+#root {
+  padding: 0 1rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.wrapper {
+  max-width: 1124px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+}
+
+.textarea {
+  width: 100%;
+  height: 30vh;
+  padding: 0.5rem;
+  border: #FF9B00 solid 1px;
+  border-radius: 0.5rem;
+  background: #efefef;
+  resize: none;
+  outline: 0;
+}
+
+.keyboard__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.keyboard__container {
+  width: 55rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 6px 24px rgba(0, 0, 0, 0.14), 0 1px 2px rgba(0, 0, 0, 0.16);
+  background: linear-gradient(95deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), url(../assets/img/dark-dotted.png), #333333;
+}
+.keyboard__container .key__content_main {
+  display: block;
+  animation: 0.2s displayContent;
+}
+.keyboard__container .key__content_shift {
+  display: none;
+}
+.keyboard__container_shift .key__content_main {
+  display: none;
+}
+.keyboard__container_shift .key__content_shift {
+  display: block;
+  animation: 0.2s displayContent;
+}
+.keyboard__container_caps .key[data-code=CapsLock] .key__icon {
+  transform: rotate(180deg);
+}
+
+.keyboard__key_width75 {
+  width: 2.4rem;
+}
+.keyboard__key_width100 {
+  width: 3.2rem;
+}
+.keyboard__key_width125 {
+  width: 4rem;
+}
+.keyboard__key_width165 {
+  width: 5.3rem;
+}
+.keyboard__key_width195 {
+  width: 6.2rem;
+}
+.keyboard__key_width220 {
+  width: 7.1rem;
+}
+.keyboard__key_width750 {
+  width: 24rem;
+}
+.keyboard__key_main.key {
+  background: #696969;
+  box-shadow: inset -0.4rem 0 0.4rem rgba(51, 51, 51, 0.6), inset 0 -0.4rem 0.4rem rgb(51, 51, 51);
+}
+.keyboard__key_main .key__outer {
+  background: linear-gradient(90deg, rgba(51, 51, 51, 0.2) 0%, rgba(51, 51, 51, 0.3) 100%);
+  box-shadow: -0.4rem -0.2rem 0.4rem rgba(51, 51, 51, 0.6), 0 0.25rem 0.25rem rgba(51, 51, 51, 0.2);
+  border-left: 0.05rem solid rgba(124, 124, 124, 0.3);
+  border-right: 0.05rem solid rgba(124, 124, 124, 0.3);
+  border-bottom: 0.05rem solid rgba(124, 124, 124, 0.3);
+  border-top: 0.05rem solid rgba(124, 124, 124, 0.1);
+}
+.keyboard__key_func.key {
+  background: #232323;
+  box-shadow: inset -0.4rem 0 0.4rem rgba(66, 66, 66, 0.6), inset 0 -0.4rem 0.4rem rgba(66, 66, 66, 0.2);
+}
+.keyboard__key_func .key__outer {
+  background: linear-gradient(90deg, rgba(66, 66, 66, 0.5) 0%, rgba(66, 66, 66, 0.7) 100%);
+  box-shadow: -0.4rem -0.2rem 0.4rem rgba(66, 66, 66, 0.6), 0 0.25rem 0.25rem rgba(66, 66, 66, 0.1);
+  border-left: 0.05rem solid rgba(88, 88, 88, 0.3);
+  border-right: 0.05rem solid rgba(88, 88, 88, 0.3);
+  border-bottom: 0.05rem solid rgba(88, 88, 88, 0.3);
+  border-top: 0.05rem solid rgba(88, 88, 88, 0.1);
+}
+
+.key {
+  height: 3.2rem;
+  position: relative;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.key.pressed {
+  animation: 0.3s pressKey;
+  filter: brightness(90%);
+  transform: scaleY(97%) translateY(3%);
+}
+
+.key__outer {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.4rem;
+  bottom: 0.35rem;
+  right: 0.4rem;
+  border-radius: 0.25rem;
+  padding: 0.3rem;
+}
+
+.key__container {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 200ms ease-out;
+}
+.keyboard__key_left .key__container {
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+}
+.keyboard__key_right .key__container {
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+}
+.keyboard__key_center .key__container {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.key__content, .key__content_main, .key__content_shift {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 120%;
+  color: #FF9B00;
+}
+
+.key__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.keyboard__info {
+  align-self: flex-start;
+  font-size: 0.8rem;
+}
+
+@keyframes pressKey {
+  from {
+    filter: brightness(100%);
+    transform: scaleY(100%) translateY(0);
+  }
+  to {
+    filter: brightness(90%);
+    transform: scaleY(97%) translateY(3%);
+  }
+}
+@keyframes displayContent {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

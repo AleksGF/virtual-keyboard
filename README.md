@@ -1,1 +1,1 @@
-# Virtual-Keyboard
+# RSSchool study project 

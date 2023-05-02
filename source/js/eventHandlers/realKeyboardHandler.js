@@ -23,10 +23,6 @@ const realKeyboardHandler = (e, keys) => {
     && code !== 'AltRight'
     && code !== 'ShiftLeft'
     && code !== 'ShiftRight'
-    && code !== 'ArrowRight'
-    && code !== 'ArrowLeft'
-    && code !== 'ArrowUp'
-    && code !== 'ArrowDown'
     && !e.ctrlKey
     && !e.metaKey
     && !e.altKey
